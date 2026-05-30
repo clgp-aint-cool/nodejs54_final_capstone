@@ -9,7 +9,16 @@ export interface Seat {
 }
 
 export interface TicketRoom {
-  maLichChieu: number;
+  thongTinPhim: {
+    maLichChieu: number;
+    tenCumRap: string;
+    tenRap: string;
+    diaChi: string;
+    tenPhim: string;
+    hinhAnh: string;
+    ngayChieu: string | Date;
+    gioChieu: string | Date;
+  };
   danhSachGhe: Seat[];
 }
 
