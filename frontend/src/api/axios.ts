@@ -2,6 +2,19 @@ import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5002';
+const cleanBaseUrl = BASE_URL.replace(/\/$/, ''); // Xóa dấu gạch chéo ở cuối nếu có
+
+// Hàm đệ quy để tự động gắn link Backend vào các ảnh có dạng /public/uploads/...
+const fixImageUrls = (obj: any) => {
+  if (!obj || typeof obj !== 'object') return;
+  for (const key in obj) {
+    if (typeof obj[key] === 'string' && obj[key].startsWith('/public/uploads/')) {
+      obj[key] = cleanBaseUrl + obj[key];
+    } else if (typeof obj[key] === 'object') {
+      fixImageUrls(obj[key]);
+    }
+  }
+};
 
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -15,8 +28,6 @@ axiosInstance.interceptors.request.use(
     const token = useAuthStore.getState().token;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-      // Note: Cybersoft spec requires TokenCybersoft, but the backend implementation 
-      // seems to just use Bearer token. I will only add Authorization.
     }
     return config;
   },
@@ -24,10 +35,15 @@ axiosInstance.interceptors.request.use(
 );
 
 axiosInstance.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // Tự động sửa toàn bộ link ảnh trong data trả về
+    if (response.data) {
+      fixImageUrls(response.data);
+    }
+    return response;
+  },
   (error) => {
     if (error.response?.status === 401) {
-      // Clear store on unauthorized
       useAuthStore.getState().logout();
       window.location.href = '/login';
     }
