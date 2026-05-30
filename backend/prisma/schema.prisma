@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model LoaiNguoiDung {
+  maLoaiNguoiDung String    @id @db.VarChar(5)
+  tenLoai         String    @db.VarChar(50)
+  nguoiDung       NguoiDung[]
+}
+
+model NguoiDung {
+  taiKhoan       String        @id @db.VarChar(50)
+  matKhau        String        @db.VarChar(255)
+  hoTen          String        @db.VarChar(50)
+  email          String?       @db.VarChar(50)
+  soDt           String?       @db.VarChar(12)
+  maLoaiNguoiDung String       @db.VarChar(5)
+  maNhom         String        @db.VarChar(20)
+  loaiNguoiDung  LoaiNguoiDung @relation(fields: [maLoaiNguoiDung], references: [maLoaiNguoiDung])
+  datVe          DatVe[]
+
+  @@index([maLoaiNguoiDung])
+}
+
+model HeThongRap {
+  maHeThongRap String      @id @db.VarChar(10)
+  tenHeThongRap String      @db.VarChar(100)
+  logo         String?     @db.VarChar(255)
+  cumRap       CumRap[]
+}
+
+model CumRap {
+  maCumRap     String       @id @db.VarChar(10)
+  tenCumRap    String       @db.VarChar(200)
+  diaChi       String       @db.VarChar(255)
+  maHeThongRap String       @db.VarChar(10)
+  heThongRap   HeThongRap  @relation(fields: [maHeThongRap], references: [maHeThongRap])
+  rap          Rap[]
+
+  @@index([maHeThongRap])
+}
+
+model Rap {
+  maRap     String    @id @db.VarChar(10)
+  tenRap    String    @db.VarChar(50)
+  maCumRap  String    @db.VarChar(10)
+  cumRap    CumRap   @relation(fields: [maCumRap], references: [maCumRap])
+  lichChieu LichChieu[]
+  ghe       Ghe[]
+
+  @@index([maCumRap])
+}
+
+model Phim {
+  maPhim       Int        @id @default(autoincrement())
+  tenPhim      String     @db.VarChar(50)
+  biDanh       String     @db.VarChar(50)
+  trailer      String?    @db.VarChar(255)
+  hinhAnh      String     @db.VarChar(255)
+  moTa         String?
+  ngayKhoiChieu DateTime?
+  danhGia      Int?
+  hot           Boolean?   @default(false)
+  sapChieu      Boolean?   @default(false)
+  dangChieu     Boolean?   @default(false)
+  lichChieu    LichChieu[]
+  banner        Banner[]
+}
+
+model LichChieu {
+  maLichChieu      Int      @id @default(autoincrement())
+  maPhim           Int
+  maRap            String   @db.VarChar(10)
+  ngayChieuGioChieu DateTime
+  giaVe            Float
+  phim             Phim     @relation(fields: [maPhim], references: [maPhim])
+  rap              Rap      @relation(fields: [maRap], references: [maRap])
+  datVe            DatVe[]
+
+  @@index([maPhim])
+  @@index([maRap])
+}
+
+model Ghe {
+  maGhe     Int      @id @default(autoincrement())
+  tenGhe    String   @db.VarChar(10)
+  loaiGhe   String   @db.VarChar(20)
+  maRap     String   @db.VarChar(10)
+  rap       Rap      @relation(fields: [maRap], references: [maRap])
+  datVe     DatVe[]
+
+  @@index([maRap])
+}
+
+model DatVe {
+  maVe            Int      @id @default(autoincrement())
+  maGhe           Int
+  maLichChieu     Int
+  giaVe           Float
+  taiKhoanNguoiDung String? @db.VarChar(50)
+  ngayDat         DateTime @default(now())
+  ghe             Ghe        @relation(fields: [maGhe], references: [maGhe])
+  lichChieu       LichChieu  @relation(fields: [maLichChieu], references: [maLichChieu])
+  nguoiDung       NguoiDung? @relation(fields: [taiKhoanNguoiDung], references: [taiKhoan])
+
+  @@index([maGhe])
+  @@index([maLichChieu])
+  @@index([taiKhoanNguoiDung])
+  @@unique([maGhe, maLichChieu])
+}
+
+model Banner {
+  maBanner   Int      @id @default(autoincrement())
+  hinhAnh    String   @db.VarChar(255)
+  maPhim     Int
+  phim       Phim     @relation(fields: [maPhim], references: [maPhim])
+
+  @@index([maPhim])
+}

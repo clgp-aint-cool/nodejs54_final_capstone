@@ -1,0 +1,1084 @@
+{
+  "info": {
+    "_postman_id": "cinema-api-collection",
+    "name": "Cinema API",
+    "description": "Movie Ticket Booking System API - Express.js + Prisma + MySQL. Base URL: http://localhost:5000",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "QUAN LY NGUOI DUNG",
+      "description": "User Management APIs",
+      "item": [
+        {
+          "name": "Dang Nhap",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"taiKhoan\": \"nguyenvana\",\n  \"matKhau\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyNguoiDung/DangNhap",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyNguoiDung",
+                "DangNhap"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();\nif (jsonData.token) {\n    pm.collectionVariables.set(\"token\", jsonData.token);\n    console.log(\"Token saved: \" + jsonData.token);\n}",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Dang Ky",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"taiKhoan\": \"testuser\",\n  \"matKhau\": \"123456\",\n  \"hoTen\": \"Test User\",\n  \"email\": \"test@email.com\",\n  \"soDt\": \"0909123456\",\n  \"maNhom\": \"GP01\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyNguoiDung/DangKy",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyNguoiDung",
+                "DangKy"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Lay Danh Sach Loai Nguoi Dung",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyNguoiDung/LayDanhSachLoaiNguoiDung",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyNguoiDung",
+                "LayDanhSachLoaiNguoiDung"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Lay Danh Sach Nguoi Dung",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP01&tuKhoa=",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyNguoiDung",
+                "LayDanhSachNguoiDung"
+              ],
+              "query": [
+                {
+                  "key": "MaNhom",
+                  "value": "GP01"
+                },
+                {
+                  "key": "tuKhoa",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Lay Danh Sach Nguoi Dung Phan Trang",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyNguoiDung/LayDanhSachNguoiDungPhanTrang?MaNhom=GP01&tuKhoa=&soTrang=1&soPhanTuTrenTrang=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyNguoiDung",
+                "LayDanhSachNguoiDungPhanTrang"
+              ],
+              "query": [
+                {
+                  "key": "MaNhom",
+                  "value": "GP01"
+                },
+                {
+                  "key": "tuKhoa",
+                  "value": ""
+                },
+                {
+                  "key": "soTrang",
+                  "value": "1"
+                },
+                {
+                  "key": "soPhanTuTrenTrang",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Tim Kiem Nguoi Dung",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP01&tuKhoa=nguyen",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyNguoiDung",
+                "TimKiemNguoiDung"
+              ],
+              "query": [
+                {
+                  "key": "MaNhom",
+                  "value": "GP01"
+                },
+                {
+                  "key": "tuKhoa",
+                  "value": "nguyen"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Tim Kiem Nguoi Dung Phan Trang",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyNguoiDung/TimKiemNguoiDungPhanTrang?MaNhom=GP01&tuKhoa=&soTrang=1&soPhanTuTrenTrang=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyNguoiDung",
+                "TimKiemNguoiDungPhanTrang"
+              ],
+              "query": [
+                {
+                  "key": "MaNhom",
+                  "value": "GP01"
+                },
+                {
+                  "key": "tuKhoa",
+                  "value": ""
+                },
+                {
+                  "key": "soTrang",
+                  "value": "1"
+                },
+                {
+                  "key": "soPhanTuTrenTrang",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Thong Tin Tai Khoan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyNguoiDung/ThongTinTaiKhoan",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyNguoiDung",
+                "ThongTinTaiKhoan"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Lay Thong Tin Nguoi Dung",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=nguyenvana",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyNguoiDung",
+                "LayThongTinNguoiDung"
+              ],
+              "query": [
+                {
+                  "key": "taiKhoan",
+                  "value": "nguyenvana"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Them Nguoi Dung",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"taiKhoan\": \"newuser\",\n  \"matKhau\": \"123456\",\n  \"hoTen\": \"New User\",\n  \"email\": \"new@email.com\",\n  \"soDt\": \"0909123456\",\n  \"maNhom\": \"GP01\",\n  \"maLoaiNguoiDung\": \"KH\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyNguoiDung/ThemNguoiDung",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyNguoiDung",
+                "ThemNguoiDung"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cap Nhat Thong Tin Nguoi Dung (PUT)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"hoTen\": \"Nguyễn Văn A Updated\",\n  \"email\": \"updated@email.com\",\n  \"soDt\": \"0909999999\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung?taiKhoan=nguyenvana",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyNguoiDung",
+                "CapNhatThongTinNguoiDung"
+              ],
+              "query": [
+                {
+                  "key": "taiKhoan",
+                  "value": "nguyenvana"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cap Nhat Thong Tin Nguoi Dung (POST)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"hoTen\": \"Nguyễn Văn A Updated\",\n  \"email\": \"updated@email.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyNguoiDung/CapNhat?taiKhoan=nguyenvana",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyNguoiDung",
+                "CapNhat"
+              ],
+              "query": [
+                {
+                  "key": "taiKhoan",
+                  "value": "nguyenvana"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Xoa Nguoi Dung",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=testuser",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyNguoiDung",
+                "XoaNguoiDung"
+              ],
+              "query": [
+                {
+                  "key": "TaiKhoan",
+                  "value": "testuser"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "QUAN LY PHIM",
+      "description": "Movie Management APIs",
+      "item": [
+        {
+          "name": "Lay Danh Sach Banner",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyPhim/LayDanhSachBanner",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyPhim",
+                "LayDanhSachBanner"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Them Banner Upload Hinh",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "maPhim",
+                  "value": "1",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyPhim/ThemBannerUploadHinh",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyPhim",
+                "ThemBannerUploadHinh"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cap Nhat Banner Upload Hinh",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "maPhim",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "maBanner",
+                  "value": "1",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyPhim/CapNhatBannerUploadHinh",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyPhim",
+                "CapNhatBannerUploadHinh"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Xoa Banner",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyPhim/XoaBanner?maBanner=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyPhim",
+                "XoaBanner"
+              ],
+              "query": [
+                {
+                  "key": "maBanner",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Lay Danh Sach Phim",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01&tenPhim=",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyPhim",
+                "LayDanhSachPhim"
+              ],
+              "query": [
+                {
+                  "key": "maNhom",
+                  "value": "GP01"
+                },
+                {
+                  "key": "tenPhim",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Lay Danh Sach Phim Phan Trang",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&tenPhim=&soTrang=1&soPhanTuTrenTrang=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyPhim",
+                "LayDanhSachPhimPhanTrang"
+              ],
+              "query": [
+                {
+                  "key": "maNhom",
+                  "value": "GP01"
+                },
+                {
+                  "key": "tenPhim",
+                  "value": ""
+                },
+                {
+                  "key": "soTrang",
+                  "value": "1"
+                },
+                {
+                  "key": "soPhanTuTrenTrang",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Lay Danh Sach Phim Theo Ngay",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyPhim/LayDanhSachPhimTheoNgay?maNhom=GP01&tenPhim=&soTrang=1&soPhanTuTrenTrang=10&tuNgay=&denNgay=",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyPhim",
+                "LayDanhSachPhimTheoNgay"
+              ],
+              "query": [
+                {
+                  "key": "maNhom",
+                  "value": "GP01"
+                },
+                {
+                  "key": "tenPhim",
+                  "value": ""
+                },
+                {
+                  "key": "soTrang",
+                  "value": "1"
+                },
+                {
+                  "key": "soPhanTuTrenTrang",
+                  "value": "10"
+                },
+                {
+                  "key": "tuNgay",
+                  "value": ""
+                },
+                {
+                  "key": "denNgay",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Lay Thong Tin Phim",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyPhim/LayThongTinPhim?MaPhim=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyPhim",
+                "LayThongTinPhim"
+              ],
+              "query": [
+                {
+                  "key": "MaPhim",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Them Phim Upload Hinh",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenPhim\": \"New Movie\",\n  \"biDanh\": \"new-movie\",\n  \"trailer\": \"https://youtube.com/watch?v=xyz\",\n  \"hinhAnh\": \"newmovie.jpg\",\n  \"moTa\": \"Movie description\",\n  \"ngayKhoiChieu\": \"2025-07-01\",\n  \"danhGia\": 8\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyPhim/ThemPhimUploadHinh",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyPhim",
+                "ThemPhimUploadHinh"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cap Nhat Phim Upload",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenPhim\": \"Avengers: Endgame Updated\",\n  \"danhGia\": 10\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyPhim/CapNhatPhimUpload/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyPhim",
+                "CapNhatPhimUpload",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Upload Hinh Anh",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "tenPhim",
+                  "value": "movie-name",
+                  "type": "text"
+                },
+                {
+                  "key": "maNhom",
+                  "value": "GP01",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyPhim/UploadHinhAnh?tenPhim=movie&maNhom=GP01",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyPhim",
+                "UploadHinhAnh"
+              ],
+              "query": [
+                {
+                  "key": "tenPhim",
+                  "value": "movie"
+                },
+                {
+                  "key": "maNhom",
+                  "value": "GP01"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Xoa Phim",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyPhim/XoaPhim?MaPhim=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyPhim",
+                "XoaPhim"
+              ],
+              "query": [
+                {
+                  "key": "MaPhim",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "XP (Xoa Phim)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyPhim/XP?MaPhim=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyPhim",
+                "XP"
+              ],
+              "query": [
+                {
+                  "key": "MaPhim",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "QUAN LY RAP",
+      "description": "Cinema & Theater Management APIs",
+      "item": [
+        {
+          "name": "Lay Thong Tin He Thong Rap",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyRap/LayThongTinHeThongRap?maHeThongRap=",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyRap",
+                "LayThongTinHeThongRap"
+              ],
+              "query": [
+                {
+                  "key": "maHeThongRap",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Lay Thong Tin Cum Rap Theo He Thong",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=CGV",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyRap",
+                "LayThongTinCumRapTheoHeThong"
+              ],
+              "query": [
+                {
+                  "key": "maHeThongRap",
+                  "value": "CGV"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Lay Thong Tin Lich Chieu He Thong Rap",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maHeThongRap=CGV&maNhom=GP01",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyRap",
+                "LayThongTinLichChieuHeThongRap"
+              ],
+              "query": [
+                {
+                  "key": "maHeThongRap",
+                  "value": "CGV"
+                },
+                {
+                  "key": "maNhom",
+                  "value": "GP01"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Lay Thong Tin Lich Chieu Phim",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyRap",
+                "LayThongTinLichChieuPhim"
+              ],
+              "query": [
+                {
+                  "key": "MaPhim",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "QUAN LY DAT VE",
+      "description": "Ticket Booking APIs",
+      "item": [
+        {
+          "name": "Lay Danh Sach Phong Ve",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyDatVe",
+                "LayDanhSachPhongVe"
+              ],
+              "query": [
+                {
+                  "key": "MaLichChieu",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Dat Ve",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"maLichChieu\": 1,\n  \"danhSachVe\": [\n    { \"maGhe\": 1, \"giaVe\": 100000 },\n    { \"maGhe\": 2, \"giaVe\": 100000 }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyDatVe/DatVe",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyDatVe",
+                "DatVe"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "QUAN LY LICH CHIEU",
+      "description": "Showtime Management APIs",
+      "item": [
+        {
+          "name": "Tao Lich Chieu",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"maPhim\": 1,\n  \"ngayChieuGioChieu\": \"2025-06-20T10:00:00\",\n  \"maRap\": \"rap1\",\n  \"giaVe\": 100000\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/QuanLyLichChieu/TaoLichChieu",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "QuanLyLichChieu",
+                "TaoLichChieu"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

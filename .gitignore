@@ -1,0 +1,45 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS
+.DS_Store
+
+# Editor
+.vscode/
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Build
+dist/
+dist-ssr/
+build/
+
+*.log
+
+# Scripts and test files
+backend/test-api.js
+backend/test_api2.js
+backend/test_api3.js
+backend/check_db.js
+backend/check_seats.js
+backend/fill_seats.js
+backend/seed_seats.js
+backend/update_images.js
+backend/update_logos.js
+backend/fix_plain_images.js
